@@ -4,7 +4,9 @@ jobs:
   build:
     docker:
       - image: circleci/python:3.6.6-browsers
-
+    filters:
+      branches:
+        only: Test-1
     working_directory: ~/repo
 
     steps:
