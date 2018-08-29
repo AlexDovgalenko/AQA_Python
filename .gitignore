@@ -1,0 +1,4 @@
+.idea/
+.pytest_cache/
+pytest-env/
+tests/.pytest_cache/
