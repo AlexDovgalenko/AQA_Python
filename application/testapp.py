@@ -21,4 +21,5 @@ def generate_fibonacci(length):
     return result
 
 
-print(generate_fibonacci(12))
+if __name__ == '__main__':
+    print(generate_fibonacci(12))
