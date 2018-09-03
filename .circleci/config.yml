@@ -23,7 +23,8 @@ jobs:
           name: run tests
           command: |
             . venv/bin/activate
-            pytest -v ./tests/test_fibanacci_function.py
+            cd ./tests/api_tests
+            pytest -v .
 
       - store_artifacts:
           path: test-reports
