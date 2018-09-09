@@ -17,6 +17,7 @@ headers = {
 my_path = os.path.abspath(os.path.dirname('../../__file__'))
 path_to_payload_create = os.path.join(my_path, "test_data/jsons/create_issue_payloads")
 path_to_payload_update = os.path.join(my_path, "test_data/jsons/update_issue_payloads")
+path_to_payload_search = os.path.join(my_path, "test_data/jsons/search_issue_payloads")
 
 # global variable to store Issue ID created in JIRA
 issue_id = ''
@@ -26,7 +27,7 @@ issue_id = ''
 def test_create_issue(payload, expected_status_code):
     datetime = common_utils.get_current_datetime_str()
     payload_fin = payload % datetime
-    r = requests.request("POST", baseUrl+api_url, data=payload_fin, headers=headers, auth=(username, password))
+    r = requests.request("POST", baseUrl+api_url+"/issue", data=payload_fin, headers=headers, auth=(username, password))
     assert r.status_code == int(expected_status_code)
     if 'id' in r.json():
         global issue_id
@@ -36,5 +37,11 @@ def test_create_issue(payload, expected_status_code):
 @pytest.mark.parametrize("payload, expected_status_code", common_utils.read_issue_data_from_csv(path_to_payload_update))
 def test_update_issue(payload, expected_status_code):
     global issue_id
-    r = requests.request("PUT", baseUrl+api_url+'/'+issue_id, data=payload, headers=headers, auth=(username, password))
+    r = requests.request("PUT", baseUrl+api_url+'/issue/'+issue_id, data=payload, headers=headers, auth=(username, password))
+    assert r.status_code == int(expected_status_code)
+
+
+@pytest.mark.parametrize("payload, expected_status_code", common_utils.read_issue_data_from_csv(path_to_payload_search))
+def test_search_for_issue(payload, expected_status_code):
+    r = requests.request("POST", baseUrl+api_url+'/search', data=payload, headers=headers, auth=(username, password))
     assert r.status_code == int(expected_status_code)
