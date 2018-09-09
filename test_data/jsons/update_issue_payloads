@@ -1,1 +1,3 @@
-{"fields": {"project":{"key": "AQAPYTHON"},"summary": "AQAPYTHON --  %s API Alex's test issue","description": "This issue have been created via Jira REST API for testing purposes in terms of AqAPython project","issuetype": {"name": "Bug"}}}|201
+{"fields": {"summary": "AQAPYTHON --  API test issue by AlexDovgalenko -- U-P-D-A-T-E-D"}}|204
+{"update":{"priority":[{"set":{"name" : "High"}}]}}|204
+{"update":{"assignee":[{"set":{"name" : "Vladimir_Berezhnoy"}}]}}|204
