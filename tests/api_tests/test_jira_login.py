@@ -3,7 +3,9 @@ from configurations import config
 from utils import common_utils
 import logging
 import pytest
+import os.path
 
+os.path.dirname('../../__file__')
 
 logger = logging.getLogger()
 baseUrl = config.Config.JIRA_BASE_URL
