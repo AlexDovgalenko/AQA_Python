@@ -21,7 +21,7 @@ jobs:
           name: run tests
           command: |
             . venv/bin/activate
-            cd /tests/api_tests
+            cd ./tests/api_tests
             pytest -v test_issue_manipulations.py
 
       - store_artifacts:
