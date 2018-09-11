@@ -2,3 +2,5 @@
 .pytest_cache/
 pytest-env/
 tests/.pytest_cache/
+venv/
+tests/api_tests/venv
