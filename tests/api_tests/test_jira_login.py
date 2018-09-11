@@ -5,7 +5,7 @@ import pytest
 import os.path
 
 
-class TestLoginToJira():
+class TestLoginToJira:
 
     os.path.dirname('../../__file__')
 

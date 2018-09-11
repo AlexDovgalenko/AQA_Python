@@ -6,7 +6,7 @@ import pytest
 import os.path
 
 
-class TestIssueManipulations():
+class TestIssueManipulations:
 
     os.path.dirname('../../__file__')
 
@@ -19,9 +19,9 @@ class TestIssueManipulations():
         'Content-Type': "application/json",
         }
     # global variable to store Issue ID created in JIRA
-    issue_id = ''
+    issue_id = []
 
-    @pytest.fixture(scope='module', autouse=True)
+    @pytest.fixture(scope='session', autouse=True)
     def payload_type(payload_type):
         my_path = os.path.abspath(os.path.dirname('../../__file__'))
         payload = []
@@ -37,27 +37,27 @@ class TestIssueManipulations():
         return payload
 
     def teardown_class(self):
-        # logger.debug("deleting issue with ID: {}".format(issue_id))
-        requests.request("DELETE", self.baseUrl+self.api_url+"/issue/"+issue_id, headers=self.headers, auth=(self.username, self.password))
+        for x in range(len(self.issue_id)):
+            requests.request("DELETE", self.baseUrl+self.api_url+"/issue/"+self.issue_id[x], headers=self.headers, auth=(self.username, self.password))
+            print("deleting issue with ID: {}".format(self.issue_id[x]))
 
     @pytest.mark.parametrize("payload, expected_status_code", payload_type("create"))
     def test_create_issue(self, payload, expected_status_code):
         datetime = common_utils.get_current_datetime_str()
         payload_fin = payload % datetime
         r = requests.request("POST", self.baseUrl+self.api_url+"/issue", data=payload_fin, headers=self.headers, auth=(self.username, self.password))
-        assert r.status_code == int(expected_status_code)
+        assert r.status_code == int(expected_status_code), "Status code {0} is no match to the expected Status code {1} on attempt of creating issue".format(r.status_code, int(expected_status_code))
         if 'id' in r.json():
             global issue_id
-            issue_id = r.json()['id']
+            self.issue_id.append(r.json()['id'])
 
-    @pytest.mark.dependency(depends = ['test_create_issue'])
     @pytest.mark.parametrize("payload, expected_status_code", payload_type("update"))
-    def test_update_issue(self, payload, expected_status_code):
-        global issue_id
+    def test_update_issue(self, payload, expected_status_code, test_create_issue_api):
+        issue_id = test_create_issue_api
         r = requests.request("PUT", self.baseUrl+self.api_url+'/issue/'+issue_id, data=payload, headers=self.headers, auth=(self.username, self.password))
-        assert r.status_code == int(expected_status_code)
+        assert r.status_code == int(expected_status_code), "Status code {0} is no match to the expected Status code {1} on attempt of updating issue".format(r.status_code, int(expected_status_code))
 
     @pytest.mark.parametrize("payload, expected_status_code", payload_type("search"))
     def test_search_for_issue(self, payload, expected_status_code):
         r = requests.request("POST", self.baseUrl+self.api_url+'/search', data=payload, headers=self.headers, auth=(self.username, self.password))
-        assert r.status_code == int(expected_status_code)
+        assert r.status_code == int(expected_status_code), "Status code {0} is no match to the expected Status code {1} on attempt of searching for issues".format(r.status_code, int(expected_status_code))
