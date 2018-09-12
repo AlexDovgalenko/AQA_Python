@@ -16,15 +16,15 @@ class TestLoginToJira:
         'Content-Type': "application/json",
     }
 
-    @pytest.mark.parametrize("username, password, response_code", [
+    @pytest.mark.parametrize("user_name, pass_word, response_code", [
         (username, password, 200),
-        (common_utils.rnd_string_gen(10), password, 401),
-        (username, common_utils.rnd_string_gen(10), 401)
+        ("wrong_user", password, 401),
+        (username, "wrong_pass", 401)
         ])
-    def test_jira_login(self, username, password, response_code, logger):
-        logger.debug("USERNAME IS: {}".format(username))
-        response = requests.request("GET", self.baseUrl, headers=self.headers, auth=(username, password))
+    def test_jira_login(self, user_name, pass_word, response_code, logger):
+        logger.debug("USERNAME IS: {}".format(user_name))
+        response = requests.request("GET", self.baseUrl, headers=self.headers, auth=(user_name, pass_word))
         logger.debug("RESPONSE STATUS CODE: {}".format(response.status_code))
         logger.debug("EXPECTED STATUS CODE: {}".format(response_code))
-        assert response.status_code == response_code
+        assert response.status_code == response_code, "Actual status code {0} is not equal to expected {1}".format(response.status_code, response_code)
 
