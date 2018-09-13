@@ -22,7 +22,7 @@ jobs:
           command: |
             . venv/bin/activate
             cd ./tests/api_tests
-            pytest -v --capture=no
+            pytest -n 4 -v .
 
       - store_artifacts:
           path: test-reports
