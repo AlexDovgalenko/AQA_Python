@@ -3,4 +3,6 @@
 pytest-env/
 tests/.pytest_cache/
 venv/
-tests/api_tests/venv
+tests/api_tests/venv/
+reports/
+geckodriver.log

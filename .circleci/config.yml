@@ -21,8 +21,9 @@ jobs:
           name: run tests
           command: |
             . venv/bin/activate
-            cd ./tests/api_tests
-            pytest -n 4 -v .
+            mkdir ./reports
+            python3 -m pytest tests/ui_tests/test_ui_jira_login.py --alluredir ./reports/
+            when: always
 
       - store_artifacts:
           path: test-reports
