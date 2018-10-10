@@ -27,17 +27,12 @@ python3 -m pytest  -n 4 tests/ui_tests/test_ui_jira_login.py --alluredir ./repor
 
 To collect allure reports need to run: 
 ```
-allure report generate ./reports
+allure generate -c ./reports
 ```
 
 To open reports run:
 ```
-allure report open ./reports
-```
-
-To clean report run:
-```
-allure report clean ./reports
+allure serve ./reports
 ```
 
 ## To delete python cache files need to run:

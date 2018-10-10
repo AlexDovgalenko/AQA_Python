@@ -1,6 +1,0 @@
-{
-  "tests/ui_tests/test_ui_jira_login.py::TestLoginToJira::()::test_negative_login_to_jira[-test_pass]": true,
-  "tests/ui_tests/test_ui_jira_login.py::TestLoginToJira::()::test_negative_login_to_jira[Alexander_Dovgalenko-]": true,
-  "tests/ui_tests/test_ui_jira_login.py::TestLoginToJira::()::test_negative_login_to_jira[Alexander_Dovgalenko-wrong_pass]": true,
-  "tests/ui_tests/test_ui_jira_login.py::TestLoginToJira::()::test_negative_login_to_jira[wrong_user-test_pass]": true
-}

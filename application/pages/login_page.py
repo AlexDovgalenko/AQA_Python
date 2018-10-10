@@ -1,5 +1,7 @@
 from application.base.base_page import BasePage
+from application.pages.dashboard_page import DashboardPage
 from ..elements.login_page_elements import LoginPageElements
+import time
 
 
 class LoginPage(BasePage):
@@ -26,3 +28,5 @@ class LoginPage(BasePage):
         self.elements.user_name.fill_with(username)
         self.elements.user_password.fill_with(password)
         self.elements.login_btn.click()
+        time.sleep(2)
+        return self

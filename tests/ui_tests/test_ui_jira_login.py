@@ -15,6 +15,7 @@ class TestLoginToJira(BaseTest):
     password = Config.password
     expected_login_error_message = "Sorry, your username and password are incorrect - please try again."
 
+    @pytest.mark.noautofixt
     @pytest.mark.parametrize("user_name, pass_word", [
 
         ("", password),
@@ -32,7 +33,7 @@ class TestLoginToJira(BaseTest):
 
         assert_that(self.pages.login_page.elements.login_error_message_container.extract_text(), self.expected_login_error_message)
 
-
+    @pytest.mark.noautofixt
     @pytest.mark.parametrize("user_name, pass_word", [(username, password)])
     def test_positive_login_to_jira(self, user_name, pass_word, logger):
         self.pages.login_page.fill_username(user_name)

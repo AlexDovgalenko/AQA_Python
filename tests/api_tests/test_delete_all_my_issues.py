@@ -27,7 +27,7 @@ def get_issue_list_by_user_id(user_mame):
     return issue_id_list
 
 
-@pytest.mark.skip
+
 @pytest.mark.parametrize("issue_id", get_issue_list_by_user_id(username))
 def test_delete_issues(issue_id, logger):
     """

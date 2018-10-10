@@ -8,7 +8,7 @@ import os.path
 
 class TestIssueManipulations:
 
-    os.path.dirname('../../__file__')
+    # os.path.dirname('../../__file__')
 
     # logger = logging.getLogger()
     baseUrl = config.Config.JIRA_BASE_URL
@@ -23,7 +23,7 @@ class TestIssueManipulations:
 
     @pytest.fixture(scope='session', autouse=True)
     def payload_type(payload_type):
-        my_path = os.path.abspath(os.path.dirname('../../__file__'))
+        my_path = os.path.abspath(os.path.dirname('__file__'))
         payload = []
         if payload_type == 'create':
             path = os.path.join(my_path, "test_data/jsons/create_issue_payloads")

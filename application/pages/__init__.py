@@ -1,5 +1,5 @@
 from application.pages.login_page import LoginPage
-from application.pages.add_issue_page import AddIssuePage
+from application.pages.create_issue_page import CreateUpdateIssuePage
 from application.pages.dashboard_page import DashboardPage
 
 
@@ -12,10 +12,12 @@ class Pages(object):
         return LoginPage(self.driver)
 
     @property
-    def add_issue_page(self):
-        return AddIssuePage(self.driver)
+    def create_issue_page(self):
+        return CreateUpdateIssuePage(self.driver)
 
     @property
     def dashboard_page(self):
         return DashboardPage(self.driver)
+
+
 

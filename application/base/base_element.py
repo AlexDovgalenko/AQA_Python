@@ -5,11 +5,11 @@ import logging
 import time
 
 import selenium.webdriver.support.expected_conditions as ec
-# from selenium.common.exceptions import TimeoutException
-# from selenium.webdriver.common.action_chains import ActionChains
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.ui import WebDriverWait
-
+from selenium.webdriver.common.keys import Keys
 import application.locators as locators
 from utils.config import Config
 
@@ -55,7 +55,6 @@ class BaseElement(object):
         self.locator_value = locator[1]
         self.locator_description = locator[2] if len(locator) == 3 else ""
         return self
-
 
     def clear(self):
         self.elem.clear()

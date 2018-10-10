@@ -1,6 +1,5 @@
 import pytest
 from utils.config import Config
-# from webdriver_manager.chrome import ChromeDriverManager
 from application.pages import Pages
 
 
@@ -8,13 +7,21 @@ from application.pages import Pages
 class BaseTest(object):
 
     def get_url(self):
-        return self.driver.get(Config.app_url)
+        return self.driver.get(Config.base_url)
 
     @property
     def pages(self):
         return Pages(self.driver)
 
-    # @pytest.fixture
-    # def login_to_jira(self):
-    #     blabla.login()
+    @pytest.fixture()
+    def login_to_jira(self, driver):
+        driver.get(Config.base_url)
+        # self.pages.login_page.login_as("Alexander_Dovgalenko", "test_pass")
+        self.pages.login_page.elements.user_name.wait_to_be_visible().fill_with("Alexander_Dovgalenko")
+        self.pages.login_page.elements.user_password.wait_to_be_visible().fill_with("test_pass")
+        self.pages.login_page.elements.login_btn.wait_to_be_visible().click()
+        return self
+
+
+
 
