@@ -78,7 +78,7 @@ def test_create_issue_api(logger):
 #     return d
 
 
-@pytest.fixture(scope="function")
+@pytest.fixture()
 def up_browser(request):
     """ SetUp/TearDown selenium driver """
 

@@ -22,6 +22,6 @@ class DashboardPage(BasePage):
         self.elements.issues_dropdown.wait_to_be_clickable()
         self.elements.issues_dropdown.wait_to_be_visible().context.wait_to_be_visible().click()
         self.elements.issues_dropdown_reported_by_me.move_to().context.wait_to_be_visible().click()
-        return self
+        return self.elements.reported_by_me_label.wait_to_be_visible().is_visible()
 
 

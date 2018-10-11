@@ -24,7 +24,8 @@ class CreateUpdateIssuePage(BasePage):
         return self
 
     def enter_issue_type(self, issuetype):
-        self.elements.issue_type_dropdown.wait_to_be_visible().context.wait_to_be_visible().click()
+        self.elements.issue_type_dropdown.wait_to_be_visible().click()
+        self.elements.issue_type_dropdown.wait_to_be_visible().click()
         self.elements.issue_type_dropdown.fill_with(issuetype, clear=True, keys=Keys.ENTER)
         return self
 
@@ -32,7 +33,7 @@ class CreateUpdateIssuePage(BasePage):
         date_time = get_current_datetime_str()
         global global_date_time
         global_date_time = date_time
-        summary_res = summary % date_time
+        summary_res = summary.format(date_time)
         self.elements.summary_field.wait_to_be_visible().context.wait_to_be_visible().click()
         self.elements.summary_field.fill_with(summary_res)
         return self
@@ -52,7 +53,7 @@ class CreateUpdateIssuePage(BasePage):
         self.elements.description_text_tab.click()
         self.enter_description(description)
         self.submit_issue()
-        return self
+        # return self
 
     def get_global_date_time(self):
         return global_date_time

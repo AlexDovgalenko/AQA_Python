@@ -16,6 +16,20 @@ from utils.config import Config
 logger = logging.getLogger()
 
 
+# class BasePageElement(object):
+#     """
+#     Singleton class for all page elements objects
+#     """
+#     __shared_state = {}
+#
+#     def __init__(self, driver=None):
+#         self.__dict__ = self.__shared_state
+#         self.driver = driver or self.__shared_state['driver']
+#         self.locators = locators
+#         if '__driver' not in globals():
+#             globals().update({'__driver': self.driver})
+
+
 class BasePageElement(object):
     """
     Singleton class for all page elements objects
@@ -27,6 +41,8 @@ class BasePageElement(object):
         self.driver = driver or self.__shared_state['driver']
         self.locators = locators
         if '__driver' not in globals():
+            globals().update({'__driver': self.driver})
+        if globals()['__driver'].session_id != self.driver.session_id:
             globals().update({'__driver': self.driver})
 
 
