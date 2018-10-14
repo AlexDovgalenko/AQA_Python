@@ -16,15 +16,15 @@ headers = {
 # # global variable to store Issue ID created in JIRA
 # issue_id = ''
 
-
-@pytest.fixture()
-def get_issue_list_by_user_id(user_mame):
-    payload = '{"jql":"reporter = %s","startAt":0, "maxResults": 1000, "fields":["id"]}' % user_mame
-    r = requests.request("POST", baseUrl + api_url + '/search', data=payload, headers=headers, auth=(username, password))
-    issue_id_list = []
-    for i in r.json().get('issues'):
-        issue_id_list.append(i['id'])
-    return issue_id_list
+#
+# @pytest.fixture()
+# def get_issue_list_by_user_id(user_mame):
+#     payload = '{"jql":"reporter = %s","startAt":0, "maxResults": 1000, "fields":["id"]}' % user_mame
+#     r = requests.request("POST", baseUrl + api_url + '/search', data=payload, headers=headers, auth=(username, password))
+#     issue_id_list = []
+#     for i in r.json().get('issues'):
+#         issue_id_list.append(i['id'])
+#     return issue_id_list
 
 
 

@@ -47,3 +47,40 @@ class DashboardPageElements(BasePageElement):
     @property
     def search_issues_list_item(self):
         return Element(DashboardPageLocators.search_issues_list_item)
+
+    @property
+    def summary_edit_btn(self):
+        return Element(DashboardPageLocators.summary_edit_btn)
+
+    @property
+    def summary_edit_fld(self):
+        return Element(DashboardPageLocators.summary_edit_fld)
+
+    @property
+    def summary_submit_btn(self):
+        return Element(DashboardPageLocators.summary_submit_btn)
+
+    @property
+    def severity_edit_val(self):
+        return Element(DashboardPageLocators.severity_edit_val)
+
+    @property
+    def severity_edit_fld(self):
+        return Element(DashboardPageLocators.severity_edit_fld)
+
+    @property
+    def severity_submit_btn(self):
+        return Element(DashboardPageLocators.severity_submit_btn)
+
+    @property
+    def severity_list_item(self):
+        return Element(DashboardPageLocators.severity_list_item)
+
+    @property
+    def search_for_issues_menu_item(self):
+        return Element(DashboardPageLocators.search_for_issues_menu_item)
+
+    @property
+    def search_issue_elements_summary(self):
+        return Element(DashboardPageLocators.search_issue_elements_summary)
+

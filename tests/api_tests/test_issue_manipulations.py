@@ -1,7 +1,7 @@
 import requests
 from configurations import config
 from utils import common_utils
-# import logging
+import logging
 import pytest
 import os.path
 

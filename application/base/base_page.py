@@ -16,5 +16,8 @@ class BasePage(object):
     def open(self, url):
         return self.driver.get(url)
 
+    def reload(self):
+        return self.driver.refresh()
+
 
 

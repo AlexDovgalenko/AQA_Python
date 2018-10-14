@@ -31,6 +31,7 @@ class TestCreateJiraIssue(BaseTest):
     # @pytest.mark.skip
     @pytest.mark.parametrize("project, summary, description, issuetype, error_message", get_issue_params('negative'))
     def test_create_new_issue_ui_negative(self, project, summary, description, issuetype, error_message, login_to_jira):
+        common_utils.delete_all_my_issues(Config.username)
         with step("Navigate to the \"Reported by Me\" issues page"):
             self.pages.dashboard_page.go_to_reported_by_me()
             self.pages.dashboard_page.is_reported_by_me_page()
@@ -44,6 +45,7 @@ class TestCreateJiraIssue(BaseTest):
 
     @pytest.mark.parametrize("project, summary, description, issuetype",  get_issue_params('positive'))
     def test_create_new_issue_ui_positive(self, project, summary, description, issuetype, login_to_jira):
+        common_utils.delete_all_my_issues(Config.username)
         with step("Navigate to the \"Reported by Me\" issues page"):
             self.pages.dashboard_page.go_to_reported_by_me()
             self.pages.dashboard_page.is_reported_by_me_page()
