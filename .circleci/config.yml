@@ -25,15 +25,12 @@ jobs:
             . venv/bin/activate
             mkdir ./reports
             python3 -m pytest -v tests/ui_tests/test_ui_jira_login.py --alluredir ./reports
-            when: always
+          when: always
+
       - run:
           name: generate reports
           command: |
             allure-2.7.0/bin/allure generate -c ./reports
-
-      - run:
-          name: renerate reports
-          command: allure generate ./reports
 
       - store_artifacts:
           path: ./reports
