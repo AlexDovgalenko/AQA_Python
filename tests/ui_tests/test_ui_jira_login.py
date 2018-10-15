@@ -31,14 +31,17 @@ class TestLoginToJira(BaseTest):
             self.pages.login_page.fill_password(pass_word)
             self.pages.login_page.submit()
 
-        assert_that(self.pages.login_page.elements.login_error_message_container.extract_text(), self.expected_login_error_message)
+            assert_that(self.pages.login_page.elements.login_error_message_container.extract_text(), self.expected_login_error_message)
 
     @pytest.mark.noautofixt
     @pytest.mark.parametrize("user_name, pass_word", [(username, password)])
     def test_positive_login_to_jira(self, user_name, pass_word, logger):
-        self.pages.login_page.fill_username(user_name)
-        self.pages.login_page.fill_password(pass_word)
-        self.pages.login_page.submit()
+        self.driver.get(Config.base_url)
+        with step("Try to login to Jira wit {} username and {} password".format(user_name, pass_word)):
 
-        assert self.pages.login_page.user_profile()
+            self.pages.login_page.fill_username(user_name)
+            self.pages.login_page.fill_password(pass_word)
+            self.pages.login_page.submit()
+
+            assert self.pages.login_page.user_profile()
 

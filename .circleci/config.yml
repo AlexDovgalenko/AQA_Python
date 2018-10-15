@@ -22,7 +22,7 @@ jobs:
           command: |
             . venv/bin/activate
             mkdir ./reports
-            python3 -m pytest -n 3 tests/ui_tests/test_ui_jira_login.py --alluredir ./reports/
+            python3 -m pytest -v tests/ui_tests/test_ui_jira_login.py --alluredir ./reports/
             when: always
 
       - store_artifacts:
