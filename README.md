@@ -20,7 +20,7 @@ Prepare test environment on MAC
 To run tests manually need to run:
 ```
 mkdir -p ./reports
-python3 -m pytest  -n 4 tests/ui_tests/test_ui_jira_login.py --alluredir ./reports/
+python3 -m pytest -n 4 tests/ui_tests/ --alluredir ./reports/
 ```
 
 ## Allure reporting:

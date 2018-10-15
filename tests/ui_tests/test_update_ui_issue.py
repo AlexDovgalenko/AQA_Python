@@ -29,7 +29,7 @@ class TestUpdateJiraIssue(BaseTest):
         with step("Try to update issue summary from original value to [{}]".format(updated_summary)):
             self.pages.dashboard_page.update_first_issue_summary(updated_summary)
             self.pages.dashboard_page.reload()
-            time.sleep(1)
+            time.sleep(2)
             self.pages.dashboard_page.is_dashboard_page()
             self.pages.dashboard_page.elements.first_issue_in_list_sumary.click()
             self.pages.dashboard_page.elements.first_issue_in_list_sumary.is_visible()
