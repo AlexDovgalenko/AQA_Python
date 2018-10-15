@@ -17,7 +17,8 @@ jobs:
             . venv/bin/activate
             pip install -r requirements.txt
 
-            curl -r
+            curl -L  https://qameta.bintray.com/generic/io/qameta/allure/allure/2.7.0/allure-2.7.0.zip -o allure.zip
+            unzip ./allure.zip
 
       - run:
           name: run tests
@@ -26,6 +27,10 @@ jobs:
             mkdir ./reports
             python3 -m pytest -v tests/ui_tests/test_ui_jira_login.py --alluredir ./reports
             when: always
+      - run:
+          name: generate reports
+          command: |
+            allure-2.7.0/bin/allure generate -c ./reports
 
       - run:
           name: renerate reports
