@@ -13,7 +13,7 @@ import time
 step = allure.step
 
 
-@allure.story("Create Jira Issue")
+@allure.story("Create Jira Issue in UI")
 class TestCreateJiraIssue(BaseTest):
 
     @pytest.fixture()
@@ -29,6 +29,7 @@ class TestCreateJiraIssue(BaseTest):
         return issue
 
     # @pytest.mark.skip
+    @allure.title("Negative test for Issue creation via UI")
     @pytest.mark.parametrize("project, summary, description, issuetype, error_message", get_issue_params('negative'))
     def test_create_new_issue_ui_negative(self, project, summary, description, issuetype, error_message, login_to_jira):
         common_utils.delete_all_my_issues(Config.username)
@@ -42,7 +43,7 @@ class TestCreateJiraIssue(BaseTest):
             self.pages.create_issue_page.create_new_issue(project, issuetype, summary, description)
             assert_that(self.pages.create_issue_page.elements.summary_error_message.extract_text(),  error_message), "Current erroro message {0} is not equal to expected one {1}".format(self.pages.create_issue_page.elements.summary_error_message.extract_text(), error_message)
 
-
+    @allure.title("Positive test for Issue creation via UI")
     @pytest.mark.parametrize("project, summary, description, issuetype",  get_issue_params('positive'))
     def test_create_new_issue_ui_positive(self, project, summary, description, issuetype, login_to_jira):
         common_utils.delete_all_my_issues(Config.username)

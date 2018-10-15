@@ -19,6 +19,7 @@ password = Config.password
 headers = {
     'Content-Type': "application/json",
 }
+
 # logger = logging.getLogger()
 
 
@@ -82,7 +83,6 @@ def test_create_issue_api(logger):
 def up_browser(request):
     """ SetUp/TearDown selenium driver """
 
-
     if Config.browser == 'chrome':
         options = webdriver.ChromeOptions()
         options.add_argument("--no-sandbox")
@@ -92,10 +92,8 @@ def up_browser(request):
         d = webdriver.Chrome(executable_path=ChromeDriverManager().install(),
                              desired_capabilities=options.to_capabilities())
 
-
     elif Config.browser == 'firefox':
         d = webdriver.Firefox(executable_path=GeckoDriverManager().install())
-
 
     elif Config.browser == 'ie11':
         caps = webdriver.DesiredCapabilities.INTERNETEXPLORER
@@ -141,14 +139,6 @@ def driver(request, up_browser):
 
     return d
 
-
-
-#
-# @pytest.fixture()
-# def login_to_jira(driver):
-#     driver.get(Config.base_url)
-#     LoginPage.login_as(self, Config.username, Config.password)
-#     # return DashboardPage
 
 
 

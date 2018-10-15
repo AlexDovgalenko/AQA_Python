@@ -17,14 +17,22 @@ jobs:
             . venv/bin/activate
             pip install -r requirements.txt
 
+            curl -r
+
       - run:
           name: run tests
           command: |
             . venv/bin/activate
             mkdir ./reports
-            python3 -m pytest -v tests/ui_tests/test_ui_jira_login.py --alluredir ./reports/
+            python3 -m pytest -v tests/ui_tests/test_ui_jira_login.py --alluredir ./reports
             when: always
 
+      - run:
+          name: renerate reports
+          command: allure generate ./reports
+
       - store_artifacts:
-          path: reports
-          destination: reports
+          path: ./reports
+          destination: tr1
+      - store_test_results:
+          path: ./reports

@@ -27,7 +27,8 @@ headers = {
 #     return issue_id_list
 
 
-
+@allure.story("Testing Jira issues deletion via API")
+@allure.title("Delete all issues , created by certain user via API")
 @pytest.mark.parametrize("issue_id", get_issue_list_by_user_id(username))
 def test_delete_issues(issue_id, logger):
     """

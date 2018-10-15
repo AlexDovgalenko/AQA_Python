@@ -16,6 +16,7 @@ class TestFibanacciFunction():
         assert test_result == expected_series, \
             "Generated Fibonacci sequence {0} is not equal to the expected one {1}".format(test_result, expected_series)
 
+    @allure.title("Testing Fibonacci function")
     @pytest.mark.parametrize("iteration_number, expected_series", [
         (5, [0, 1, 1, 2, 3]),
         (9, [0, 1, 1, 2, 3, 5, 8, 13, 21]),

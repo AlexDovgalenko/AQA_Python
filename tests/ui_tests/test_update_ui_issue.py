@@ -13,10 +13,12 @@ import time
 step = allure.step
 
 
-@allure.story("Update Jira Issue")
+@allure.story("Update Jira Issue in UI")
 class TestUpdateJiraIssue(BaseTest):
 
     # @pytest.mark.skip
+    @allure.title("Update Issue summary via UI")
+    @pytest.mark.flaky(reruns=3)
     def test_update_issue_summary(self, login_to_jira):
         common_utils.delete_all_my_issues(Config.username)
         common_utils.create_issue_api()
@@ -36,6 +38,7 @@ class TestUpdateJiraIssue(BaseTest):
 
             assert_that(self.pages.dashboard_page.get_first_issue_summary(),  updated_summary), "Issue summary [{}] after update is not equal to expected summary value [{}]".format(self.pages.dashboard_page.get_first_issue_summary(),  updated_summary)
 
+    @allure.title("Update Issue severity via UI")
     def test_update_issue_severity(self, login_to_jira):
         common_utils.delete_all_my_issues(Config.username)
         common_utils.create_issue_api()

@@ -13,10 +13,10 @@ import time
 step = allure.step
 
 
-@allure.story("Search for Jira Issues")
+@allure.story("Search for Jira Issues in UI")
 class TestSearchJiraIssues(BaseTest):
 
-
+    @allure.title("Search for a single Issue via UI")
     def test_search_one_issue(self, login_to_jira):
         common_utils.delete_all_my_issues(Config.username)
         common_utils.create_issue_api()
@@ -33,7 +33,7 @@ class TestSearchJiraIssues(BaseTest):
             self.pages.dashboard_page.elements.first_issue_in_list_sumary.is_visible()
             assert_that(summary_substring, is_in(self.pages.dashboard_page.get_first_issue_summary())), "Issue summary [{}] is not equal to expected summary value [{}]".format(self.pages.dashboard_page.get_first_issue_summary(),  summary_substring)
 
-
+    @allure.title("Search for 5 Issues via UI")
     def test_search_5_issues(self, login_to_jira):
         common_utils.delete_all_my_issues(Config.username)
         common_utils.create_issue_api(5)
