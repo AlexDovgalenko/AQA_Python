@@ -35,6 +35,8 @@ jobs:
       - store_artifacts:
           path: ./reports
           destination: reports
-      - store_test_results:
-          path: allure-report
+
+      - store_artifacts:
+          path: ./allure-report
           destination: reports/allure
+
