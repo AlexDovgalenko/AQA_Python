@@ -83,4 +83,8 @@ class DashboardPageElements(BasePageElement):
     @property
     def search_issue_elements_summary(self):
         return Element(DashboardPageLocators.search_issue_elements_summary)
+    
+    @property
+    def spinner(self):
+        return Element(DashboardPageLocators.spinner)
 

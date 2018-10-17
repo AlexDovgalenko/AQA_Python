@@ -55,7 +55,7 @@ class BaseElement(object):
 
     @property
     def wd_wait(self):
-        return WebDriverWait(self._driver, Config.timeout)
+        return WebDriverWait(self._driver, Config.timeout, 3)
 
     @property
     def action_chains(self):
@@ -174,6 +174,16 @@ class WebDriverElement(BaseElement):
         logger.info("Element {} is visible: {}".format(self.elem.id, is_visible))
         return is_visible
 
+    def is_invisible(self):
+        try:
+            self.elem = WebDriverWait(self._driver, timeout=1, ignored_exceptions=(TimeoutException)).until(
+                ec.invisibility_of_element_located((self.locator_by, self.locator_value)))
+            if self.elem:
+                return self.elem
+        except:
+            pass
+        return False
+
     def is_enabled(self):
         """
         :rtype: bool
@@ -186,8 +196,16 @@ class WebDriverElement(BaseElement):
         self.wd_wait.until(lambda d: self.is_visible())
         return self
 
+    def wait_to_be_invisible(self):
+        self.wd_wait.until(lambda d: self.is_invisible())
+        return self
+
     def wait_to_be_selected(self):
         self.wd_wait.until(lambda d: self.is_selected())
+        return self
+    
+    def wait_to_be_enabled(self):
+        self.wd_wait.until(lambda d: self.is_enabled())
         return self
 
     def wait_to_be_unselected(self):
@@ -296,43 +314,19 @@ class LocatorElement(BaseElement):
         self.elem = self.wd_wait.until(ec.presence_of_element_located((self.locator_by, self.locator_value)))
         self.visible = True
         logger.debug("Element is visible")
-        # self.highlight_element()
+        return self
+
+    def wait_to_be_invisible(self):
+        logger.debug("Waiting for element <{}> to be visible".format(self.locator_description or self.locator_value))
+        self.elem = self.wd_wait.until_not(ec.presence_of_element_located((self.locator_by, self.locator_value)))
+        self.visible = False
+        logger.debug("Element is visible")
         return self
 
     def wait_to_be_clickable(self):
         logger.info("Waiting for element <{}> to be clickable".format(self.locator_description or self.locator_value))
         self.elem = self.wd_wait.until(ec.element_to_be_clickable((self.locator_by, self.locator_value)))
-        # self.highlight_element()
         return self
-
-    # def wait_to_be_invisible(self):
-    #     """
-    #     Wait for element to be invisible
-    #     :return: True if element is not visible (NoSuchElementExc, StaleElementExc)
-    #     """
-    #     logger.info("Waiting for element <{}> to be invisible".format(self.locator_description or self.locator_value))
-    #     return self.wd_wait.until(ec.invisibility_of_element_located((self.locator_by, self.locator_value)))
-
-    def is_invisible(self):
-        logger.debug("Waiting for element <{}> to be invisible".format(self.locator_description or self.locator_value))
-        try:
-            self.elem = WebDriverWait(self._driver, timeout=1, ignored_exceptions=(TimeoutException)).until(
-                ec.invisibility_of_element_located((self.locator_by, self.locator_value)))
-            if self.elem:
-                return self.elem
-        except:
-            pass
-        return False
-
-    def element_screenshot(self, filename='default.png'):
-        """
-        Takes only found element screenshot
-        Working only on Firefox for now. Chrome will also support this feature in future
-        :param filename:
-        """
-        self.find()
-        self.elem.screenshot("default.png")
-
 
 class Element(object):
     """ Factory class for elements """

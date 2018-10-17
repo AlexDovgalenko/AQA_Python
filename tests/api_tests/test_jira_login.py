@@ -3,6 +3,10 @@ from configurations import config
 from utils import common_utils
 import pytest
 import os.path
+import allure
+
+step = allure.step
+
 
 @allure.story("Testing login to Jira via API")
 class TestLoginToJira:

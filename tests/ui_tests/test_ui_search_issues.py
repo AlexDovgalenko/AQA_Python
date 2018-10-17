@@ -15,7 +15,8 @@ step = allure.step
 
 @allure.story("Search for Jira Issues in UI")
 class TestSearchJiraIssues(BaseTest):
-
+    
+    # @pytest.mark.flaky(reruns=3)
     @allure.title("Search for a single Issue via UI")
     def test_search_one_issue(self, login_to_jira):
         common_utils.delete_all_my_issues(Config.username)
@@ -27,12 +28,12 @@ class TestSearchJiraIssues(BaseTest):
 
         with step("Try to search for the issue with scecific summary which contains following substring [{}]".format(summary_substring)):
             self.pages.dashboard_page.search_for_issue_with_summary(summary_substring)
-            # self.pages.dashboard_page.reload()
-            time.sleep(2)
-            self.pages.dashboard_page.elements.first_issue_in_list_sumary.click()
+            self.pages.dashboard_page.wait_for_ajax()
+            self.pages.dashboard_page.elements.first_issue_in_list_sumary.wait_to_be_clickable().context.wait_to_be_visible().click()
             self.pages.dashboard_page.elements.first_issue_in_list_sumary.is_visible()
             assert_that(summary_substring, is_in(self.pages.dashboard_page.get_first_issue_summary())), "Issue summary [{}] is not equal to expected summary value [{}]".format(self.pages.dashboard_page.get_first_issue_summary(),  summary_substring)
-
+    
+    # @pytest.mark.skip
     @allure.title("Search for 5 Issues via UI")
     def test_search_5_issues(self, login_to_jira):
         common_utils.delete_all_my_issues(Config.username)

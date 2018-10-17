@@ -1,4 +1,5 @@
 import allure
+from allure_commons.types import AttachmentType
 import pytest
 from hamcrest import assert_that, is_in
 from application.pages import Pages
@@ -30,8 +31,10 @@ class TestLoginToJira(BaseTest):
             self.pages.login_page.fill_username(user_name)
             self.pages.login_page.fill_password(pass_word)
             self.pages.login_page.submit()
+            allure.attach(self.pages.driver.get_screenshot_as_png(), name="Screenshot", attachment_type=AttachmentType.PNG)
 
             assert_that(self.pages.login_page.elements.login_error_message_container.extract_text(), self.expected_login_error_message)
+
 
     @allure.title("Positive test Jira login via UI")
     @pytest.mark.noautofixt

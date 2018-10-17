@@ -22,3 +22,4 @@ class DashboardPageLocators:
     severity_submit_btn = (By.XPATH, '//*[@id="priority-form"]/div[2]/button[1]/span')
     search_for_issues_menu_item = (By.XPATH, '//*[@id="issues_new_search_link_lnk"]')
     search_issue_elements_summary = (By.XPATH, '//*[@id="content"]//ol[@class="issue-list"]/li/a/span[2]')
+    spinner = (By.CLASS_NAME, '//*[@class="loading"]')

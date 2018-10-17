@@ -95,22 +95,6 @@ def up_browser(request):
     elif Config.browser == 'firefox':
         d = webdriver.Firefox(executable_path=GeckoDriverManager().install())
 
-    elif Config.browser == 'ie11':
-        caps = webdriver.DesiredCapabilities.INTERNETEXPLORER
-        caps['ignoreZoomSettings'] = 'true'
-        caps['ignoreProtectedModeSettings'] = 'true'
-        d = webdriver.Ie(executable_path=IEDriverManager().install(), capabilities=caps)
-
-    elif Config.browser == 'edge':
-        caps = webdriver.DesiredCapabilities.EDGE
-        caps['nativeEvents'] = 'true'
-        caps['acceptSslCerts'] = 'true'
-        caps['javascriptEnabled'] = 'true'
-        caps['takes_screenshot'] = 'true'
-        caps['cssSelectorEnabled'] = 'true'
-        caps['INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS'] = 'true'
-        d = webdriver.Edge(executable_path=EdgeDriverManager().install(), capabilities=caps)
-
     else:
 
         sys.exit(1)
@@ -125,7 +109,7 @@ def driver(request, up_browser):
     Set up a single session for these tests.
     """
 
-    RESOLUTIONS = {"HD": (1280, 750), "FullHD": (1920, 1080), "UHD": (2890, 1560)}
+    RESOLUTIONS = {"HD": (1280, 750), "FullHD": (1920, 1080)}
 
     d = up_browser
 

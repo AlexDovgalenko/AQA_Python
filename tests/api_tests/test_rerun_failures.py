@@ -1,5 +1,8 @@
 import pytest
 import random
+import allure
+
+step = allure.step
 
 @allure.story("Check for test-rerun")
 @allure.title("Re-run failures test")

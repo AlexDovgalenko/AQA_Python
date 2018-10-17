@@ -8,16 +8,16 @@ class LoginPage(BasePage):
     def __init__(self, driver):
         super(LoginPage, self).__init__(driver)
         self.elements = LoginPageElements(driver)
-
+        
     def is_login_page(self):
         return self.elements.login_container.is_visible()
-
+    
     def fill_username(self, text):
         return self.elements.user_name.fill_with(text)
-
+    
     def fill_password(self, text):
         return self.elements.user_password.fill_with(text)
-
+    
     def submit(self):
         return self.elements.login_btn.click()
 

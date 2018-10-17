@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import configurations.config
+from utils.config import Config
 from selenium.webdriver.support.ui import WebDriverWait
 
 
@@ -18,6 +18,14 @@ class BasePage(object):
 
     def reload(self):
         return self.driver.refresh()
+    
+    def wait_for_ajax(self):
+        wait = WebDriverWait(self.driver, Config.timeout)
+        try:
+            wait.until(lambda driver: self.driver.execute_script('return jQuery.active') == 0)
+            wait.until(lambda driver: self.driver.execute_script('return document.readyState') == 'complete')
+        except Exception as e:
+            pass
 
 
 

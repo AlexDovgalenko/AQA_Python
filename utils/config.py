@@ -12,7 +12,7 @@ class Config(object):
 
     browser = config.get('TEST', 'browser')
     browser_resolution = config.get('TEST', 'browser_resolution')
-    # headless = config.getboolean('TEST', 'headless')
+    headless = config.getboolean('TEST', 'headless')
     fullscreen = config.getboolean('TEST', 'fullscreen')
 
     # protocol = config.get('ENV', 'protocol')

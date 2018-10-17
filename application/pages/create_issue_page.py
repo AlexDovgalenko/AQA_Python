@@ -34,8 +34,8 @@ class CreateUpdateIssuePage(BasePage):
         global global_date_time
         global_date_time = date_time
         summary_res = summary.format(date_time)
-        self.elements.summary_field.wait_to_be_visible().context.wait_to_be_visible().click()
-        self.elements.summary_field.fill_with(summary_res)
+        self.elements.summary_field.wait_to_be_clickable().context.wait_to_be_visible().click()
+        self.elements.summary_field.wait_to_be_clickable().context.wait_to_be_visible().fill_with(summary_res)
         return self
 
     def enter_description(self, description):

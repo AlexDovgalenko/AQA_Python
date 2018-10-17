@@ -4,6 +4,10 @@ from utils import common_utils
 import logging
 import pytest
 import os.path
+import allure
+
+step = allure.step
+
 
 @allure.story("Testing Jira issues manipulations via API")
 class TestIssueManipulations:
