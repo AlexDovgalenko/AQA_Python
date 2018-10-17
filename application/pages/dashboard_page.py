@@ -22,7 +22,7 @@ class DashboardPage(BasePage):
         self.wait_for_ajax()
         self.is_dashboard_page()
         self.elements.issues_dropdown.wait_to_be_clickable().context.wait_to_be_visible().click()
-        # self.elements.issues_dropdown.wait_to_be_visible().click()
+        self.wait_for_ajax()
         self.elements.issues_dropdown_reported_by_me.move_to().context.wait_to_be_visible().click()
         return self
 
