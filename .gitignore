@@ -3,4 +3,24 @@
 pytest-env/
 tests/.pytest_cache/
 venv/
-tests/api_tests/venv
+tests/api_tests/venv/
+reports/
+geckodriver.log
+clear_cache.sh
+clean_reports.sh
+
+### Python template
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# virtualenv
+venv/
+ENV/
+pytest-env
+
+#
+logs/
+tests_log.txt
+.pytest_cache/
