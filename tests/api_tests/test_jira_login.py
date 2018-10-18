@@ -3,12 +3,8 @@ from configurations import config
 from utils import common_utils
 import pytest
 import os.path
-import allure
-
-step = allure.step
 
 
-@allure.story("Testing login to Jira via API")
 class TestLoginToJira:
 
     os.path.dirname('../../__file__')
@@ -20,7 +16,6 @@ class TestLoginToJira:
         'Content-Type': "application/json",
     }
 
-    @allure.title("Test Login to Jira via API")
     @pytest.mark.parametrize("user_name, pass_word, response_code", [
         (username, password, 200),
         ("wrong_user", password, 401),
@@ -32,3 +27,4 @@ class TestLoginToJira:
         logger.debug("RESPONSE STATUS CODE: {}".format(response.status_code))
         logger.debug("EXPECTED STATUS CODE: {}".format(response_code))
         assert response.status_code == response_code, "Actual status code {0} is not equal to expected {1}".format(response.status_code, response_code)
+

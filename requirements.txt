@@ -1,11 +1,4 @@
-allure-pytest
-configparser
-jsonschema
-PyHamcrest
 pytest
-pytest-rerunfailures
-pytest-xdist
-PyYAML
 requests
-selenium
-webdriver-manager
+pytest-xdist
+pytest-rerunfailures
