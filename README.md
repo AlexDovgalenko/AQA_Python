@@ -1,5 +1,10 @@
 ### This is the Automation testing framework designed with educational matter based on Python 3.
 
+## Latest Build status:
+
+![CircleCI branch](https://img.shields.io/circleci/project/github/AlexDovgalenko/AQA_Python/master.svg?style=plastic)
+
+
 ## Pre-requisites:
 
 Check python version
