@@ -32,4 +32,3 @@ class TestLoginToJira:
         logger.debug("RESPONSE STATUS CODE: {}".format(response.status_code))
         logger.debug("EXPECTED STATUS CODE: {}".format(response_code))
         assert response.status_code == response_code, "Actual status code {0} is not equal to expected {1}".format(response.status_code, response_code)
-

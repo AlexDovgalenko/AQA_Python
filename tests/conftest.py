@@ -122,7 +122,3 @@ def driver(request, up_browser):
     request.instance.driver = d
 
     return d
-
-
-
-
