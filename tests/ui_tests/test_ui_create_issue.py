@@ -42,11 +42,13 @@ class TestCreateJiraIssue(BaseTest):
             self.pages.dashboard_page.elements.create_btn.wait_to_be_visible().click()
             self.pages.create_issue_page.is_create_issue_page()
             self.pages.create_issue_page.create_new_issue(project, issuetype, summary, description)
+            allure.attach(self.pages.driver.get_screenshot_as_png(), name="Screenshot",
+                          attachment_type=AttachmentType.PNG)
             assert_that(self.pages.create_issue_page.elements.summary_error_message.extract_text(),  error_message), "Current erroro message {0} is not equal to expected one {1}".format(self.pages.create_issue_page.elements.summary_error_message.extract_text(), error_message)
-            allure.attach(self.pages.driver.get_screenshot_as_png(), name="Screenshot", attachment_type=AttachmentType.PNG)
+            
     
     @allure.title("Positive test for Issue creation via UI")
-    # @pytest.mark.flaky(reruns=3)
+    @pytest.mark.flaky(reruns=1)
     @pytest.mark.parametrize("project, summary, description, issuetype",  get_issue_params('positive'))
     def test_create_new_issue_ui_positive(self, project, summary, description, issuetype, login_to_jira):
         common_utils.delete_all_my_issues(Config.username)
@@ -59,9 +61,11 @@ class TestCreateJiraIssue(BaseTest):
             self.pages.create_issue_page.is_create_issue_page()
             self.pages.create_issue_page.create_new_issue(project, issuetype, summary, description)
             self.pages.dashboard_page.wait_for_ajax()
-            self.pages.dashboard_page.go_to_reported_by_me()
+            self.pages.dashboard_page.reload()
             self.pages.dashboard_page.wait_for_ajax()
             expected_date_time = self.pages.create_issue_page.get_global_date_time()
             issue_summary = self.pages.dashboard_page.get_first_issue_summary()
+            allure.attach(self.pages.driver.get_screenshot_as_png(), name="Screenshot",
+                          attachment_type=AttachmentType.PNG)
             assert_that(expected_date_time in issue_summary), "Expected date_time value [[{0}]] is not in actual summary [[{1}]]".format(expected_date_time, issue_summary)
-            allure.attach(self.pages.driver.get_screenshot_as_png(), name="Screenshot", attachment_type=AttachmentType.PNG)
+            

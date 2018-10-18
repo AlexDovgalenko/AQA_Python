@@ -4,7 +4,6 @@ from ..elements.create_issue_page_elements import CreateUpdateIssuePageElements
 from utils.common_utils import get_current_datetime_str
 from selenium.webdriver.common.keys import Keys
 
-
 global_date_time = ''
 
 
@@ -18,14 +17,13 @@ class CreateUpdateIssuePage(BasePage):
 
     def enter_project(self, project):
         self.elements.project_dropdown.wait_to_be_visible().click()
-        # self.elements.project_dropdown.fill_with(project)
-        # self.elements.project_dropdown.elem.send_keys(Keys.ENTER)
+        self.wait_for_ajax()
         self.elements.project_dropdown.fill_with(project, clear=True, keys='RETURN')
         return self
 
     def enter_issue_type(self, issuetype):
         self.elements.issue_type_dropdown.wait_to_be_visible().click()
-        self.elements.issue_type_dropdown.wait_to_be_visible().click()
+        self.wait_for_ajax()
         self.elements.issue_type_dropdown.fill_with(issuetype, clear=True, keys=Keys.ENTER)
         return self
 
@@ -34,12 +32,15 @@ class CreateUpdateIssuePage(BasePage):
         global global_date_time
         global_date_time = date_time
         summary_res = summary.format(date_time)
-        self.elements.summary_field.wait_to_be_clickable().context.wait_to_be_visible().click()
+        self.wait_for_ajax()
+        self.elements.summary_field.wait_to_be_visible().click()
+        self.wait_for_ajax()
         self.elements.summary_field.wait_to_be_clickable().context.wait_to_be_visible().fill_with(summary_res)
         return self
 
     def enter_description(self, description):
         self.elements.description_field.wait_to_be_visible().click()
+        self.wait_for_ajax()
         self.elements.description_field.fill_with(description)
         return self
 
@@ -53,7 +54,7 @@ class CreateUpdateIssuePage(BasePage):
         self.elements.description_text_tab.click()
         self.enter_description(description)
         self.submit_issue()
-        # return self
+        return self
 
     def get_global_date_time(self):
         return global_date_time

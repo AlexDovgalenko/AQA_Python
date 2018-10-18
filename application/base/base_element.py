@@ -1,9 +1,5 @@
-# -*- coding: utf-8 -*-
-
-
 import logging
 import time
-
 import selenium.webdriver.support.expected_conditions as ec
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.action_chains import ActionChains
@@ -15,19 +11,6 @@ from utils.config import Config
 
 logger = logging.getLogger()
 
-
-# class BasePageElement(object):
-#     """
-#     Singleton class for all page elements objects
-#     """
-#     __shared_state = {}
-#
-#     def __init__(self, driver=None):
-#         self.__dict__ = self.__shared_state
-#         self.driver = driver or self.__shared_state['driver']
-#         self.locators = locators
-#         if '__driver' not in globals():
-#             globals().update({'__driver': self.driver})
 
 
 class BasePageElement(object):
@@ -74,23 +57,6 @@ class BaseElement(object):
 
     def clear(self):
         self.elem.clear()
-    #
-    # def highlight_element(self):
-    #     """
-    #     Highlighting desired web element. Can decrease test run dramatically due to time.sleep(0.5)
-    #     Please use it only for demo purposes
-    #     """
-    #     if Config.highlight:
-    #         logger.debug("Highlighting element {}".format(self.locator_description or self.locator_value))
-    #         self._driver.execute_script("""
-    #                         element = arguments[0];
-    #                         original_style = element.getAttribute('style');
-    #                         element.setAttribute('style', original_style + "; border: 2px solid red;");
-    #                         setTimeout(function(){
-    #                             element.setAttribute('style', original_style);
-    #                         }, 200);
-    #                         """, self.elem)
-    #         time.sleep(0.5)
 
 
 class WebDriverElement(BaseElement):
@@ -327,6 +293,7 @@ class LocatorElement(BaseElement):
         logger.info("Waiting for element <{}> to be clickable".format(self.locator_description or self.locator_value))
         self.elem = self.wd_wait.until(ec.element_to_be_clickable((self.locator_by, self.locator_value)))
         return self
+
 
 class Element(object):
     """ Factory class for elements """

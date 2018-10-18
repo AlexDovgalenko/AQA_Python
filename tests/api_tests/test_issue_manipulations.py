@@ -12,9 +12,7 @@ step = allure.step
 @allure.story("Testing Jira issues manipulations via API")
 class TestIssueManipulations:
 
-    # os.path.dirname('../../__file__')
 
-    # logger = logging.getLogger()
     baseUrl = config.Config.JIRA_BASE_URL
     api_url = config.Config.JIRA_REST_API_URL
     username = config.Config.JIRA_USERNAME

@@ -26,7 +26,6 @@ class TestLoginToJira(BaseTest):
         ])
     def test_negative_login_to_jira(self, user_name, pass_word):
         self.driver.get(Config.base_url)
-
         with step("Try to login to Jira wit {} username and {} password".format(user_name, pass_word)):
             self.pages.login_page.fill_username(user_name)
             self.pages.login_page.fill_password(pass_word)
@@ -42,10 +41,8 @@ class TestLoginToJira(BaseTest):
     def test_positive_login_to_jira(self, user_name, pass_word, logger):
         self.driver.get(Config.base_url)
         with step("Try to login to Jira wit {} username and {} password".format(user_name, pass_word)):
-
             self.pages.login_page.fill_username(user_name)
             self.pages.login_page.fill_password(pass_word)
             self.pages.login_page.submit()
-
             assert self.pages.login_page.user_profile()
 

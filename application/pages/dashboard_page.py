@@ -4,6 +4,7 @@ from .. elements.login_page_elements import LoginPageElements
 from selenium.webdriver.common.keys import Keys
 import time
 
+
 class DashboardPage(BasePage):
     def __init__(self, driver):
         super(DashboardPage, self).__init__(driver)
@@ -36,7 +37,6 @@ class DashboardPage(BasePage):
     def update_first_issue_summary(self, summary):
         self.is_dashboard_page()
         self.elements.summary_edit_btn.wait_to_be_visible().context.hover().click()
-        # self.elements.summary_edit_btn.wait_to_be_visible().click()
         self.elements.summary_edit_fld.wait_to_be_clickable().context.wait_to_be_visible().click()
         self.elements.summary_edit_fld.wait_to_be_visible().fill_with(summary, clear=True)
         self.elements.summary_submit_btn.wait_to_be_clickable().context.wait_to_be_visible().click()

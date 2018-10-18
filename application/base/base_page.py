@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from utils.config import Config
 from selenium.webdriver.support.ui import WebDriverWait
 
